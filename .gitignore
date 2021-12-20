@@ -2,8 +2,6 @@
 .idea
 .vscode
 
-dist/
-docs/
 downloads/
 
 *.pdf
