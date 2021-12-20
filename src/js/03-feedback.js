@@ -1,4 +1,4 @@
-import { debounce } from 'lodash';
+import { throttle } from 'lodash';
 import isLocalStorageAvailable from './storage.js';
 
 const STORAGE_KEY = 'feedback-form-state';
@@ -19,7 +19,7 @@ const app = () => {
     const message = evt.target.elements.message.value.trim();
 
     evt.target.reset();
-    isStorageAvailable && localStorage.clear();
+    isStorageAvailable && localStorage.removeItem(STORAGE_KEY);
 
     console.log('email: ', email);
     console.log('message: ', message);
@@ -36,8 +36,7 @@ const app = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
   };
 
-
-  if (isStorageAvailable) {
+  if (isStorageAvailable && localStorage.getItem(STORAGE_KEY)) {
     Object.assign(formData, JSON.parse(localStorage.getItem(STORAGE_KEY)));
     Object.keys(formData).forEach((key) => {
       elements[key].value = formData[key];
@@ -45,7 +44,7 @@ const app = () => {
   }
 
   elements.feedbackForm.addEventListener('submit', onFormSubmit);
-  elements.feedbackForm.addEventListener('input', debounce(onInputHandler, 500));
+  elements.feedbackForm.addEventListener('input', throttle(onInputHandler, 500));
 };
 
 app();
