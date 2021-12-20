@@ -2,4 +2,4 @@
 
 ## JS + parcel
 
-[gitHub Pages](https://jpee2k.github.io/goit-js-hw-08/)
+[gitHub Pages](https://jpee2k.github.io/goit-js-hw-08/dist/)
