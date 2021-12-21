@@ -15,14 +15,16 @@ const app = () => {
 
   const onFormSubmit = (evt) => {
     evt.preventDefault();
-    const email = evt.target.elements.email.value.trim();
-    const message = evt.target.elements.message.value.trim();
+    formData.email = evt.target.elements.email.value.trim();
+    formData.message = evt.target.elements.message.value.trim();
 
-    evt.target.reset();
-    isStorageAvailable && localStorage.removeItem(STORAGE_KEY);
-
-    console.log('email: ', email);
-    console.log('message: ', message);
+    if (formData.email && formData.message) {
+      console.log(formData);
+      evt.target.reset();
+      isStorageAvailable && localStorage.removeItem(STORAGE_KEY);
+    } else {
+      console.warn('Please fill all of fields');
+    }
   };
 
   const onInputHandler = (evt) => {
