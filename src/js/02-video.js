@@ -19,6 +19,10 @@ const savePlayerTime = async (player) => {
 };
 
 const loadPlayerTime = (player) => {
+  if (!localStorage.getItem(STORAGE_KEY)) {
+    return;
+  }
+
   try {
     const currTimeFromStorage = parseFloat(localStorage.getItem(STORAGE_KEY));
     player.setCurrentTime(currTimeFromStorage);
